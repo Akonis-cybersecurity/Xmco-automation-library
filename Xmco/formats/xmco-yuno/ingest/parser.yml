@@ -1,4 +1,4 @@
-name: xmco_yuno
+name: xmco-yuno
 
 pipeline:
   - name: parsed_event
