@@ -14,13 +14,19 @@
         "default": "https://leportail.xmco.fr/api"
       }
     },
-    "required": ["api_key"],
-    "secrets": ["api_key"]
+    "required": [
+      "api_key"
+    ],
+    "secrets": [
+      "api_key"
+    ]
   },
   "description": "XMCO Yuno is a cybersecurity intelligence service providing daily-qualified security bulletins covering CVEs, campaigns, and patches.",
   "name": "XMCO",
   "slug": "xmco",
-  "categories": ["Threat Intelligence"],
-  "uuid": "b5a49aa3-b2e6-4d9d-a661-b8d6050890be",
+  "categories": [
+    "Threat Intelligence"
+  ],
+  "uuid": "0720a7a0-a952-4128-8361-671913df3036",
   "version": "0.0.1"
 }

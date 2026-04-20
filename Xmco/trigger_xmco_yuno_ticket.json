@@ -1,5 +1,5 @@
 {
-  "uuid": "b2c3d4e5-f6a7-8901-bcde-f12345678902",
+  "uuid": "3980194c-f2f7-4500-90a1-249289babf35",
   "name": "Fetch XMCO Yuno Tickets",
   "description": "Periodically fetch XMCO Yuno tickets and push them to a Sekoia intake",
   "docker_parameters": "xmco_yuno_ticket",
@@ -27,7 +27,9 @@
         "description": "Initial start date (RFC2822) for first run. Example: 'Mon, 01 Jan 2024 00:00:00 GMT'. Defaults to 30 days ago if not set."
       }
     },
-    "required": ["intake_key"]
+    "required": [
+      "intake_key"
+    ]
   },
   "results": {
     "$schema": "http://json-schema.org/draft-07/schema#",

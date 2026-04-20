@@ -4,5 +4,5 @@ slug: xmco-yuno
 description: "Advisory events from the XMCO Yuno API. Covers security bulletins including CVE, patch, and threat intelligence advisories."
 data_sources:
   Third-party application logs: "Security advisory and vulnerability intelligence events from the XMCO Yuno API"
-automation_connector_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567801
-automation_module_uuid: b5a49aa3-b2e6-4d9d-a661-b8d6050890be
+automation_connector_uuid: 17005983-0b0e-43cd-aa53-ee72260c0b26
+automation_module_uuid: 0720a7a0-a952-4128-8361-671913df3036

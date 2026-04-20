@@ -12,7 +12,9 @@
         "type": "string"
       }
     },
-    "required": ["advisory_id"]
+    "required": [
+      "advisory_id"
+    ]
   },
   "results": {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -20,5 +22,5 @@
     "type": "object",
     "properties": {}
   },
-  "uuid": "c3d4e5f6-a7b8-9012-cdef-123456789003"
+  "uuid": "434a1b83-1b01-4608-acd1-b09eab40c69b"
 }

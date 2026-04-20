@@ -18,15 +18,28 @@
       "status": {
         "description": "New ticket status",
         "type": "string",
-        "enum": ["new", "in_progress", "waiting", "resolved"]
+        "enum": [
+          "new",
+          "in_progress",
+          "waiting",
+          "resolved"
+        ]
       },
       "severity": {
         "description": "New ticket severity",
         "type": "string",
-        "enum": ["urgent", "high", "medium", "low"]
+        "enum": [
+          "urgent",
+          "high",
+          "medium",
+          "low"
+        ]
       }
     },
-    "required": ["ticket_id", "status"]
+    "required": [
+      "ticket_id",
+      "status"
+    ]
   },
   "results": {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -34,5 +47,5 @@
     "type": "object",
     "properties": {}
   },
-  "uuid": "a7b8c9d0-e1f2-3456-abcd-567890000007"
+  "uuid": "b53f13f6-debe-4a27-a512-004bd7a5d762"
 }
