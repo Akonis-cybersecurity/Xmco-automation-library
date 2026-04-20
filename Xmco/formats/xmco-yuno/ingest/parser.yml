@@ -117,7 +117,7 @@ stages:
           event.type: "{{ ['info'] }}"
 
       - set:
-          event.id: "{{ parsed_event.message._id }}"
+          xmco.yuno.id: "{{ parsed_event.message._id }}"
         filter: >-
           {{ parsed_event.message._id is defined and
              parsed_event.message._id is not none }}

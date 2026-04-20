@@ -1,3 +1,8 @@
+xmco.yuno.id:
+  description: Internal XMCO advisory identifier.
+  name: xmco.yuno.id
+  type: keyword
+
 xmco.yuno.advisory_type:
   description: Type of the XMCO advisory (INFO, PATCH, VULN).
   name: xmco.yuno.advisory_type

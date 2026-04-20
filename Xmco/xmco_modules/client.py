@@ -1,4 +1,5 @@
 import json
+import re
 import time
 from typing import Optional
 
@@ -66,7 +67,19 @@ class XMCOClient:
         return self._get(f"/vulnerability/{vuln_id}")
 
     def get_cve(self, cve_id: str) -> dict:
-        return self._get(f"/cve/{cve_id}")
+        if re.fullmatch(r"[0-9a-f]{24}", cve_id, re.IGNORECASE):
+            return self._get(f"/cve/{cve_id}")
+        return self.get_cve_by_name(cve_id)
+
+    def get_cve_by_name(self, cve_name: str) -> dict:
+        result = self._get("/cve", params={
+            "where": json.dumps({"cve_id": cve_name}),
+            "max_results": 1,
+        })
+        items = result.get("_items", [])
+        if not items:
+            raise ValueError(f"CVE {cve_name} not found")
+        return items[0]
 
     def get_followed_cpe_names(self) -> dict:
         return self._get("/followed_cpe_name")
