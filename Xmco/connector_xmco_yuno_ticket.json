@@ -26,12 +26,9 @@
         "description": "Initial start date (RFC2822) for first run. Example: 'Mon, 01 Jan 2024 00:00:00 GMT'. Defaults to 30 days ago if not set."
       }
     },
-    "required": ["intake_key"]
-  },
-  "results": {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "properties": {},
-    "title": "Events"
+    "required": [
+      "intake_key"
+    ]
   },
   "uuid": "b2c3d4e5-f6a7-8901-bcde-f12345678902"
 }

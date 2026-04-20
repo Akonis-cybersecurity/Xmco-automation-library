@@ -24,19 +24,21 @@
       "min_severity": {
         "type": "string",
         "description": "Minimum severity filter",
-        "enum": ["urgent", "high", "medium", "low"]
+        "enum": [
+          "urgent",
+          "high",
+          "medium",
+          "low"
+        ]
       },
       "start_date": {
         "type": "string",
         "description": "Initial start date (RFC2822) for first run. Example: 'Mon, 01 Jan 2024 00:00:00 GMT'. Defaults to 30 days ago if not set."
       }
     },
-    "required": ["intake_key"]
-  },
-  "results": {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "properties": {},
-    "title": "Events"
+    "required": [
+      "intake_key"
+    ]
   },
   "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567801"
 }
