@@ -932,6 +932,20 @@ files = [
 ]
 
 [[package]]
+name = "isort"
+version = "8.0.1"
+description = "A Python utility / library to sort Python imports."
+optional = false
+python-versions = ">=3.10.0"
+files = [
+    {file = "isort-8.0.1-py3-none-any.whl", hash = "sha256:28b89bc70f751b559aeca209e6120393d43fbe2490de0559662be7a9787e3d75"},
+    {file = "isort-8.0.1.tar.gz", hash = "sha256:171ac4ff559cdc060bcfff550bc8404a486fee0caab245679c2abe7cb253c78d"},
+]
+
+[package.extras]
+colors = ["colorama"]
+
+[[package]]
 name = "itsdangerous"
 version = "2.2.0"
 description = "Safely pass data to untrusted environments and back."
@@ -2789,4 +2803,4 @@ propcache = ">=0.2.1"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "2c0e05c4ff0b95028807e527b63524f96045d89e97c30b9d949083e7bab4193f"
+content-hash = "1378d864446201b7498e71008fb9156e0728aa7df2c64921e4c51f5e8ca1ed6c"
