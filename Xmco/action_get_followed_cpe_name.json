@@ -1,0 +1,18 @@
+{
+  "description": "Retrieve the list of followed CPE technology names",
+  "docker_parameters": "get_followed_cpe_name",
+  "name": "Get Followed CPE Names",
+  "arguments": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Get Followed CPE Names Arguments",
+    "type": "object",
+    "properties": {}
+  },
+  "results": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Followed CPE Names",
+    "type": "object",
+    "properties": {}
+  },
+  "uuid": "f6a7b8c9-d0e1-2345-fabc-456789000006"
+}

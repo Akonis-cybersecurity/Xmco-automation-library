@@ -1,0 +1,184 @@
+name: xmco_yuno
+
+pipeline:
+  - name: parsed_event
+    description: JSON parsing stage
+    external:
+      name: json.parse-json
+      properties:
+        input_field: "{{ original.message }}"
+        output_field: message
+
+  - name: parse_timestamp
+    external:
+      name: date.parse
+      properties:
+        input_field: "{{ parsed_event.message._created }}"
+        output_field: "@timestamp"
+        format: "%a, %d %b %Y %H:%M:%S %Z"
+
+  - name: set_observer
+  - name: map_vendor_fields
+  - name: map_ecs_core
+  - name: ecs_categorization
+  - name: set_vulnerability
+  - name: cleanup
+
+stages:
+  set_observer:
+    actions:
+      - set:
+          observer.type: "application"
+
+  map_vendor_fields:
+    actions:
+      - set:
+          xmco.yuno.advisory_type: "{{ parsed_event.message.advisory_type }}"
+        filter: >-
+          {{ parsed_event.message.advisory_type is defined and
+             parsed_event.message.advisory_type is not none }}
+
+      - set:
+          xmco.yuno.vulnerable: "{{ parsed_event.message.vulnerable }}"
+        filter: >-
+          {{ parsed_event.message.vulnerable is defined and
+             parsed_event.message.vulnerable is not none and
+             parsed_event.message.vulnerable != "" }}
+
+      - set:
+          xmco.yuno.exploitation_vector: "{{ parsed_event.message.exploitation_vector }}"
+        filter: >-
+          {{ parsed_event.message.exploitation_vector is defined and
+             parsed_event.message.exploitation_vector is not none and
+             parsed_event.message.exploitation_vector != "" }}
+
+      - set:
+          xmco.yuno.damage: "{{ parsed_event.message.damage }}"
+        filter: >-
+          {{ parsed_event.message.damage is defined and
+             parsed_event.message.damage is not none and
+             parsed_event.message.damage | length > 0 }}
+
+      - set:
+          xmco.yuno.cve_refs: "{{ parsed_event.message.cve_refs }}"
+        filter: >-
+          {{ parsed_event.message.cve_refs is defined and
+             parsed_event.message.cve_refs is not none and
+             parsed_event.message.cve_refs | length > 0 }}
+
+      - set:
+          xmco.yuno.remediation: "{{ parsed_event.message.content_fr.remediation }}"
+        filter: >-
+          {{ parsed_event.message.content_fr is defined and
+             parsed_event.message.content_fr.remediation is defined and
+             parsed_event.message.content_fr.remediation is not none }}
+
+  map_ecs_core:
+    actions:
+      - set:
+          rule.id: "{{ parsed_event.message.ref }}"
+        filter: >-
+          {{ parsed_event.message.ref is defined and
+             parsed_event.message.ref is not none }}
+
+      - set:
+          rule.name: "{{ parsed_event.message.official_title }}"
+        filter: >-
+          {{ parsed_event.message.official_title is defined and
+             parsed_event.message.official_title is not none }}
+
+      - set:
+          rule.reference: "{{ parsed_event.message.references }}"
+        filter: >-
+          {{ parsed_event.message.references is defined and
+             parsed_event.message.references is not none and
+             parsed_event.message.references != "" }}
+
+      - set:
+          rule.description: "{{ parsed_event.message.content_fr.description }}"
+        filter: >-
+          {{ parsed_event.message.content_fr is defined and
+             parsed_event.message.content_fr.description is defined and
+             parsed_event.message.content_fr.description is not none }}
+
+      - set:
+          observer.vendor: "{{ parsed_event.message.vendor }}"
+        filter: >-
+          {{ parsed_event.message.vendor is defined and
+             parsed_event.message.vendor is not none }}
+
+  ecs_categorization:
+    actions:
+      - set:
+          event.provider: "XMCO Yuno"
+          event.dataset: "xmco.yuno.advisory"
+          event.kind: "event"
+          event.category: "{{ ['vulnerability'] }}"
+          event.type: "{{ ['info'] }}"
+
+      - set:
+          event.id: "{{ parsed_event.message._id }}"
+        filter: >-
+          {{ parsed_event.message._id is defined and
+             parsed_event.message._id is not none }}
+
+      # Prefer French title, fall back to English
+      - set:
+          event.reason: "{{ parsed_event.message.content_fr.title }}"
+        filter: >-
+          {{ parsed_event.message.content_fr is defined and
+             parsed_event.message.content_fr.title is defined and
+             parsed_event.message.content_fr.title is not none }}
+
+      - set:
+          event.reason: "{{ parsed_event.message.content_en.title }}"
+        filter: >-
+          {{ final['event.reason'] is not defined and
+             parsed_event.message.content_en is defined and
+             parsed_event.message.content_en.title is defined and
+             parsed_event.message.content_en.title is not none }}
+
+  set_vulnerability:
+    actions:
+      - set:
+          vulnerability.scanner.vendor: "XMCO"
+
+      - set:
+          vulnerability.severity: "{{ parsed_event.message.severity }}"
+        filter: >-
+          {{ parsed_event.message.severity is defined and
+             parsed_event.message.severity is not none }}
+
+      - set:
+          vulnerability.id: "{{ parsed_event.message.cve_refs[0] }}"
+        filter: >-
+          {{ parsed_event.message.cve_refs is defined and
+             parsed_event.message.cve_refs is not none and
+             parsed_event.message.cve_refs | length > 0 }}
+
+      - set:
+          vulnerability.description: "{{ parsed_event.message.content_fr.description }}"
+        filter: >-
+          {{ parsed_event.message.content_fr is defined and
+             parsed_event.message.content_fr.description is defined and
+             parsed_event.message.content_fr.description is not none }}
+
+      - set:
+          vulnerability.description: "{{ parsed_event.message.content_en.description }}"
+        filter: >-
+          {{ final['vulnerability.description'] is not defined and
+             parsed_event.message.content_en is defined and
+             parsed_event.message.content_en.description is defined and
+             parsed_event.message.content_en.description is not none }}
+
+      - set:
+          vulnerability.score.base: "{{ parsed_event.message.impact | float }}"
+        filter: >-
+          {{ parsed_event.message.impact is defined and
+             parsed_event.message.impact is not none and
+             parsed_event.message.impact != 0.0 }}
+
+  cleanup:
+    actions:
+      - delete:
+          - parsed_event

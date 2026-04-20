@@ -1,0 +1,38 @@
+{
+  "description": "Update the status and/or severity of a XMCO Yuno ticket",
+  "docker_parameters": "update_yuno_ticket",
+  "name": "Update Yuno Ticket",
+  "arguments": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Update Yuno Ticket Arguments",
+    "type": "object",
+    "properties": {
+      "ticket_id": {
+        "description": "The ID of the Yuno ticket to update",
+        "type": "string"
+      },
+      "etag": {
+        "description": "ETag value for optimistic concurrency (fetched automatically if omitted)",
+        "type": "string"
+      },
+      "status": {
+        "description": "New ticket status",
+        "type": "string",
+        "enum": ["new", "in_progress", "waiting", "resolved"]
+      },
+      "severity": {
+        "description": "New ticket severity",
+        "type": "string",
+        "enum": ["urgent", "high", "medium", "low"]
+      }
+    },
+    "required": ["ticket_id", "status"]
+  },
+  "results": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Updated Ticket",
+    "type": "object",
+    "properties": {}
+  },
+  "uuid": "a7b8c9d0-e1f2-3456-abcd-567890000007"
+}

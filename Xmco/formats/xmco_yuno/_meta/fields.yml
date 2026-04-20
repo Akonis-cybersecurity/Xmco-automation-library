@@ -1,0 +1,29 @@
+xmco.yuno.advisory_type:
+  description: Type of the XMCO advisory (INFO, PATCH, VULN).
+  name: xmco.yuno.advisory_type
+  type: keyword
+
+xmco.yuno.cve_refs:
+  description: List of CVE identifiers referenced in the advisory.
+  name: xmco.yuno.cve_refs
+  type: keyword
+
+xmco.yuno.exploitation_vector:
+  description: Exploitation vector for the vulnerability (e.g. remote, local).
+  name: xmco.yuno.exploitation_vector
+  type: keyword
+
+xmco.yuno.damage:
+  description: List of damage types associated with the advisory (e.g. system_access, denial_of_service).
+  name: xmco.yuno.damage
+  type: keyword
+
+xmco.yuno.remediation:
+  description: Remediation guidance from CERT-XMCO (French content).
+  name: xmco.yuno.remediation
+  type: text
+
+xmco.yuno.vulnerable:
+  description: Description of vulnerable software versions or configurations.
+  name: xmco.yuno.vulnerable
+  type: text

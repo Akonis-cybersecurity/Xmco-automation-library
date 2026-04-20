@@ -8,12 +8,14 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.11"
 sekoia-automation-sdk = "^1.22.5"
+requests = "^2.31.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
 pytest-cov = "*"
-requests = "*"
 requests-mock = "*"
+isort = "*"
+black = "*"
 
 [build-system]
 requires = ["poetry-core"]

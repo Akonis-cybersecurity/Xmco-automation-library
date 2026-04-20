@@ -1,0 +1,42 @@
+{
+  "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567801",
+  "name": "Fetch XMCO Yuno Advisories",
+  "description": "Periodically fetch XMCO Yuno advisory bulletins and push them to a Sekoia intake",
+  "docker_parameters": "xmco_yuno_advisory",
+  "arguments": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "XMCO Yuno Advisory Connector Configuration",
+    "type": "object",
+    "properties": {
+      "intake_key": {
+        "description": "Intake key to use when sending events",
+        "type": "string"
+      },
+      "intake_server": {
+        "description": "Server of the intake server (e.g. 'https://intake.sekoia.io')",
+        "default": "https://intake.sekoia.io",
+        "type": "string"
+      },
+      "frequency": {
+        "type": "integer",
+        "description": "Pull interval in seconds",
+        "default": 3600
+      },
+      "min_severity": {
+        "type": "string",
+        "description": "Minimum severity filter",
+        "enum": ["urgent", "high", "medium", "low"]
+      },
+      "start_date": {
+        "type": "string",
+        "description": "Initial start date (RFC2822) for first run. Example: 'Mon, 01 Jan 2024 00:00:00 GMT'. Defaults to 30 days ago if not set."
+      }
+    },
+    "required": ["intake_key"]
+  },
+  "results": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "properties": {},
+    "title": "Events"
+  }
+}

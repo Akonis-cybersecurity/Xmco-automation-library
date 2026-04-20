@@ -1,0 +1,23 @@
+[
+  {
+    "value": "{xmco.yuno.advisory_type} advisory [{vulnerability.severity}] — {rule.name}",
+    "conditions": [
+      { "field": "xmco.yuno.advisory_type" },
+      { "field": "vulnerability.severity" },
+      { "field": "rule.name" }
+    ]
+  },
+  {
+    "value": "{vulnerability.id} — {event.reason}",
+    "conditions": [
+      { "field": "vulnerability.id" },
+      { "field": "event.reason" }
+    ]
+  },
+  {
+    "value": "{event.reason}",
+    "conditions": [
+      { "field": "event.reason" }
+    ]
+  }
+]

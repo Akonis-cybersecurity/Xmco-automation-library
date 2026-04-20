@@ -1,0 +1,24 @@
+{
+  "description": "Retrieve a CVE record by its ID",
+  "docker_parameters": "get_cve",
+  "name": "Get CVE",
+  "arguments": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Get CVE Arguments",
+    "type": "object",
+    "properties": {
+      "cve_id": {
+        "description": "The CVE identifier (e.g. CVE-2023-12345)",
+        "type": "string"
+      }
+    },
+    "required": ["cve_id"]
+  },
+  "results": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "CVE",
+    "type": "object",
+    "properties": {}
+  },
+  "uuid": "e5f6a7b8-c9d0-1234-efab-345678900005"
+}
